@@ -43,6 +43,12 @@
 
 		<projectOsgiVersion>4.3.1</projectOsgiVersion>
 
+        <!-- Barchart private repository in Office. -->
+        <barchartNexusURL>https://nexus.barchart.com</barchartNexusURL>
+        <barchartArchonURL>${barchartNexusURL}/content/groups/archon</barchartArchonURL>
+        <barchartReleaseURL>${barchartNexusURL}/content/repositories/releases</barchartReleaseURL>
+        <barchartSnapshotsURL>${barchartNexusURL}/content/repositories/snapshots</barchartSnapshotsURL>
+
 	</properties>
 
 	<dependencies>
@@ -138,6 +144,122 @@
 		</dependency>
 
 	</dependencies>
+
+    <profiles>
+
+        <!-- ================================ -->
+
+        <!-- Activated during release. See maven-release-plugin. -->
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+
+                    <!-- Release must contain sources. -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <!-- Provide custom execution id. -->
+                                <id>attach-sources-no-fork</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Release must contain javadoc. -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <!-- Override default execution id. -->
+                                <id>attach-javadocs</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Release must be signed. -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Private Barchart Nexus repository -->
+        <profile>
+            <id>barchart-nexus-repository</id>
+            <activation>
+                <file>
+                    <missing>maven-amazon.md</missing>
+                </file>
+            </activation>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>barchart-nexus-snapshots</id>
+                    <name>Barchart Nexus Snapshots</name>
+                    <url>${barchartSnapshotsURL}</url>
+                </snapshotRepository>
+                <repository>
+                    <id>barchart-nexus-releases</id>
+                    <name>Barchart Nexus Releases</name>
+                    <url>${barchartReleaseURL}</url>
+                </repository>
+            </distributionManagement>
+            <repositories>
+                <repository>
+                    <id>barchart-nexus-archon</id>
+                    <name>Barchart Nexus Archon / Regular</name>
+                    <url>${barchartArchonURL}</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>barchart-nexus-archon</id>
+                    <name>Barchart Nexus Archon / Plugins</name>
+                    <url>${barchartArchonURL}</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+
+        </profile>    
+    </profiles>
 
 	<reporting>
 		<plugins>
