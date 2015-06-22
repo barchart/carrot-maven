@@ -18,12 +18,12 @@
 
 	<description>${project.organization.name} SCR Maven Plugin</description>
 
-	<scm>
-		<url>https://github.com/carrot-garden/carrot-maven</url>
-		<connection>scm:git:git://github.com/carrot-garden/carrot-maven.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/carrot-garden/carrot-maven.git</developerConnection>
-		<tag>master</tag>
-	</scm>
+  <scm>
+    <url>https://github.com/barchart/carrot-maven</url>
+    <connection>scm:git:git://github.com/barchart/carrot-maven.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/barchart/carrot-maven.git</developerConnection>
+    <tag>master</tag>
+  </scm>
 
 	<prerequisites>
 
