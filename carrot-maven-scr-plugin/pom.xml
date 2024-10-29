@@ -1,14 +1,17 @@
 <!-- Copyright (C) 2010-2013 Andrei Pozolotin <Andrei.Pozolotin@gmail.com> 
-	All rights reserved. Licensed under the OSI BSD License. http://www.opensource.org/licenses/bsd-license.php -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	All rights reserved. Licensed under the OSI BSD License.
+http://www.opensource.org/licenses/bsd-license.php -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.barchart.base</groupId>
-        <artifactId>barchart-archon</artifactId>
-        <version>3.0.29</version>
-    </parent>
+	<parent>
+		<groupId>com.barchart.base</groupId>
+		<artifactId>barchart-archon</artifactId>
+		<version>3.0.29</version>
+	</parent>
 
 
 	<groupId>com.barchart</groupId>
@@ -21,7 +24,8 @@
 	<scm>
 		<url>https://github.com/barchart/carrot-maven</url>
 		<connection>scm:git:git://github.com/barchart/carrot-maven.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/barchart/carrot-maven.git</developerConnection>
+		<developerConnection>
+			scm:git:ssh://git@github.com/barchart/carrot-maven.git</developerConnection>
 		<tag>master</tag>
 	</scm>
 
@@ -140,17 +144,14 @@
 	</dependencies>
 
 
-
-	<reporting>
+	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.5.2</version>
 			</plugin>
-
 		</plugins>
-	</reporting>
+	</build>
 
 </project>
